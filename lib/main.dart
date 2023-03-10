@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   };
 
   final totalDataMap = <String, double>{
-    "Gastos": 2102.00,
+    "Gastos": 4750.00,
     "Total": 5000.00,
   };
 
@@ -304,7 +304,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             ),
                             Container(
                               color: const Color(0xff344055),
-                              width: constraints.maxWidth * .3,
+                              width: (constraints.maxWidth - 16) *
+                                  (totalDataMap["Gastos"]! /
+                                      totalDataMap["Total"]!),
                               height: 32,
                               child: Center(
                                 child: Text(
