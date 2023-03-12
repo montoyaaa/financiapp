@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     MediaQueryData deviceInfo = MediaQuery.of(context);
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 220, 220, 220),
+      backgroundColor: const Color.fromARGB(255, 218, 218, 218),
       body: SafeArea(
         child: ScrollView(deviceInfo),
       ),
@@ -239,93 +239,117 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
         ),
         SliverFillRemaining(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              PieChart(
-                dataMap: dataMap,
-                animationDuration: const Duration(milliseconds: 800),
-                chartLegendSpacing: 32,
-                chartRadius: deviceInfo.size.width / 2.5,
-                // colorList: [],
-                initialAngleInDegree: 0,
-                chartType: ChartType.ring,
-                ringStrokeWidth: 30,
-                legendOptions: const LegendOptions(
-                  showLegendsInRow: false,
-                  legendPosition: LegendPosition.right,
-                  showLegends: true,
-                  legendShape: BoxShape.circle,
-                  legendTextStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                 ),
-                chartValuesOptions: const ChartValuesOptions(
-                  showChartValueBackground: true,
-                  showChartValues: true,
-                  showChartValuesOutside: true,
-                  decimalPlaces: 2,
-                ),
-                baseChartColor: const Color(0xff344055),
-              ),
-              LayoutBuilder(builder: (context, constraints) {
-                return Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'R\$ 00.00',
-                            style: TextStyle(
-                              color: Color(0xff344055),
-                              fontWeight: FontWeight.bold,
-                            ),
+                      PieChart(
+                        dataMap: dataMap,
+                        animationDuration: const Duration(milliseconds: 800),
+                        chartLegendSpacing: 32,
+                        chartRadius: deviceInfo.size.width / 2.5,
+                        // colorList: [],
+                        initialAngleInDegree: 0,
+                        chartType: ChartType.ring,
+                        ringStrokeWidth: 30,
+                        legendOptions: const LegendOptions(
+                          showLegendsInRow: false,
+                          legendPosition: LegendPosition.right,
+                          showLegends: true,
+                          legendShape: BoxShape.circle,
+                          legendTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
-                          Text(
-                            'R\$ ${totalDataMap["Total"]!.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                              color: Color(0xff344055),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                        ),
+                        chartValuesOptions: const ChartValuesOptions(
+                          showChartValueBackground: true,
+                          showChartValues: true,
+                          showChartValuesOutside: true,
+                          decimalPlaces: 2,
+                        ),
+                        baseChartColor: const Color(0xff344055),
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Stack(
-                          children: [
-                            Container(
-                              color: Colors.white,
-                              width: constraints.maxWidth,
-                              height: 32,
-                            ),
-                            Container(
-                              color: const Color(0xff344055),
-                              width: (constraints.maxWidth - 16) *
-                                  (totalDataMap["Gastos"]! /
-                                      totalDataMap["Total"]!),
-                              height: 32,
-                              child: Center(
-                                child: Text(
-                                  'R\$ ${totalDataMap["Gastos"]!.toStringAsFixed(2)}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                      LayoutBuilder(builder: (context, constraints) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'R\$ 00.00',
+                                    style: TextStyle(
+                                      color: Color(0xff344055),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
+                                  Text(
+                                    'R\$ ${totalDataMap["Total"]!.toStringAsFixed(2)}',
+                                    style: const TextStyle(
+                                      color: Color(0xff344055),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      color: const Color.fromARGB(
+                                          255, 218, 218, 218),
+                                      width: constraints.maxWidth,
+                                      height: 32,
+                                    ),
+                                    Container(
+                                      color: const Color(0xff344055),
+                                      width: (constraints.maxWidth - 16) *
+                                          (totalDataMap["Gastos"]! /
+                                              totalDataMap["Total"]!),
+                                      height: 32,
+                                      child: Center(
+                                        child: Text(
+                                          'R\$ ${totalDataMap["Gastos"]!.toStringAsFixed(2)}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
+                            ],
+                          ),
+                        );
+                      }),
                     ],
                   ),
-                );
-              }),
-            ],
+                ),
+              ),
+            ),
           ),
         ),
       ],
