@@ -84,13 +84,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicial'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_month), label: 'Calendário'),
+        ],
+        currentIndex: 0,
+        onTap: (index) {},
+      ),
     );
   }
 
   // ignore: non_constant_identifier_names
   CustomScrollView ScrollView(MediaQueryData deviceInfo) {
     return CustomScrollView(
-      // TODO: Definir metade da tela (flex) para a lista e metade para os graficos mas continuar mantendo o comportamento do scroll
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
@@ -123,8 +131,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     ConstrainedBox(
                       constraints: BoxConstraints(
                         maxHeight: _size != null
-                            ? deviceInfo.size.height * _size!
-                            : deviceInfo.size.height * .8,
+                            ? (deviceInfo.size.height * _size!)
+                            : (deviceInfo.size.height * .8) - 16,
                       ),
                       child: Material(
                         color: const Color(0xff344055),
